@@ -18,4 +18,4 @@ Follow the steps to install the Super Mario 64 program in a compiler:
 
 ## Recourses
 
-Thanks to (**Marcus Chan**) on Kaggle for making the wonderful data set of speedruns. Check out these datasets in their original form at https://www.kaggle.com/code/mcpenguin/super-mario-64-speedruns-data-collection.
+Thanks to **Marcus Chan** on Kaggle for making the wonderful data set of speedruns. Check out these datasets in their original form at https://www.kaggle.com/code/mcpenguin/super-mario-64-speedruns-data-collection.
