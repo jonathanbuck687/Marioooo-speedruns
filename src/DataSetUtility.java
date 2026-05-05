@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class DataSetUtility {
-    private ArrayList<DataSet> mariooo;
+    private static ArrayList<DataSet> mariooo;
 
     public void loadFromFile(String fileName) throws IOException{
         File file = new File(fileName);
@@ -42,18 +42,16 @@ public class DataSetUtility {
             return 0.0;
         }
     }
-    public String bestCountryPlacement(String country) {
+    public static int bestCountryPlacement(String country) {
         int best = 1000;
-        String bestCountry = "";
         for (int i = 0; i < mariooo.size(); i++) {
             if(mariooo.get(i).getCountry().equals(country)) {
                 if (mariooo.get(i).getPlacement() < best) {
                     best = mariooo.get(i).getPlacement();
-                    bestCountry = mariooo.get(i).getCountry();
                 }
             }
         }
-        return bestCountry;
+        return best;
     }
     public int personalRecord(String name) {
         int best = Integer.MAX_VALUE;
@@ -69,5 +67,35 @@ public class DataSetUtility {
     public String getNamePlacement(int placement) {
         return mariooo.get(placement - 1).getName();
     }
-
+    public String bestCountry() {
+        ArrayList<Integer> times = new ArrayList<>();
+        ArrayList<String> countries = new ArrayList<>();
+        String minCountry = "";
+        int min = Integer.MAX_VALUE;
+        boolean oui = true;
+        for (int i = 0; i < mariooo.size(); i++) {
+            for (int j = 0; j < countries.size(); j++) {
+                if (countries.get(j).equals(mariooo.get(i).getCountry())) {
+                    oui = false;
+                }
+            }
+            if (oui) {
+                countries.add(mariooo.get(i).getCountry());
+                int temper = DataSetUtility.bestCountryPlacement(mariooo.get(i).getCountry());
+                times.add(temper);
+            }
+            else {
+                int temper = DataSetUtility.bestCountryPlacement(mariooo.get(i).getCountry());
+                times.set(i ,times.get(i) + temper);
+            }
+            oui = true;
+        }
+        for(int k = 0; k < times.size(); k++) {
+            if(times.get(k) < min) {
+                min = times.get(k);
+                minCountry = countries.get(k);
+            }
+        }
+        return minCountry;
+    }
 }
